@@ -4,7 +4,7 @@ build {
   provisioner "powershell" {
     inline = [
       # Install Node.js and npm
-      "Invoke-WebRequest -Uri https://nodejs.org/dist/v14.17.0/node-v14.17.0-x64.msi -OutFile nodejs.msi",
+      "Invoke-WebRequest -Uri https://nodejs.org/dist/v18.17.0/node-v18.17.0-x64.msi -OutFile nodejs.msi",
       "Start-Process msiexec.exe -ArgumentList '/i nodejs.msi /quiet /norestart' -NoNewWindow -Wait",
       # Ensure npm is available in the path
       "$env:Path += ';C:\\Program Files\\nodejs'",
@@ -13,7 +13,7 @@ build {
       "& 'C:\\Program Files\\nodejs\\npm.cmd' install -g npm@latest",
 
       # Install Maven
-      "Invoke-WebRequest -Uri https://downloads.apache.org/maven/maven-3/3.8.1/binaries/apache-maven-3.8.1-bin.zip -OutFile maven.zip",
+      "Invoke-WebRequest -Uri https://archive.apache.org/dist/maven/maven-3/3.8.1/binaries/apache-maven-3.8.1-bin.zip -OutFile maven.zip",
       "Expand-Archive -Path maven.zip -DestinationPath C:\\maven",
       "$env:Path += ';C:\\maven\\apache-maven-3.8.1\\bin'",
       "[System.Environment]::SetEnvironmentVariable('Path', $env:Path, [System.EnvironmentVariableTarget]::Machine)",
